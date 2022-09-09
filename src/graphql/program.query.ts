@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
-export const FETCH_PROGRAMS = gql`
-  query {
+export const GET_PROGRAMS = gql`
+  query GetPrograms {
     program {
       id
     }

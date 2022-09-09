@@ -1,21 +1,20 @@
-import { useQuery } from '@apollo/client';
 import React, { useEffect } from 'react';
 
-import { FETCH_PROGRAMS } from '../../Apollo/Queries';
+import { useGetProgramsQuery } from '../../graphql';
 
 export const SlideShow = () => {
-  const { data, error, loading } = useQuery(FETCH_PROGRAMS);
+  const { data, error, loading } = useGetProgramsQuery();
 
   useEffect(() => {
     console.log(data);
   }, [data]);
 
   useEffect(() => {
-    console.log(data);
+    console.log(error);
   }, [error]);
 
   useEffect(() => {
-    console.log(data);
+    console.log('loading ...', loading);
   }, [loading]);
 
   return (
