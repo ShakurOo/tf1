@@ -8,8 +8,6 @@ import { capitalizeFirstLetter } from '../../../utils/string';
 import { SLIDESHOW_HEIGHT } from '../index';
 import { Card, LoadingCard, MoreBtn, Title, Wrapper } from './styles';
 
-let fakeImageTimer: ReturnType<typeof setTimeout>;
-
 interface ThumbnailProps
   extends Pick<Image, 'alt' | 'id' | 'url'>,
     Pick<Program, 'name'> {}
@@ -17,10 +15,6 @@ interface ThumbnailProps
 export const Thumbnail: FC<ThumbnailProps> = ({ alt, id, name, url }) => {
   const [isLoading, setIsLoading] = useState(true);
   const capitalizedName = useMemo(() => capitalizeFirstLetter(name), [name]);
-
-  useEffect(() => () => {
-    fakeImageTimer && clearTimeout(fakeImageTimer);
-  });
 
   return (
     <Wrapper>
@@ -31,10 +25,16 @@ export const Thumbnail: FC<ThumbnailProps> = ({ alt, id, name, url }) => {
       )}
 
       <div>
-        <Card height={SLIDESHOW_HEIGHT}>
+        <Card
+          height={SLIDESHOW_HEIGHT}
+          onClick={() => {
+            alert(`Show the program page :\n\n- Id: ${id}\n- Name: "${name}"`);
+          }}
+        >
           <MoreBtn
-            onClick={() => {
-              console.log('CLICK !');
+            onClick={(event) => {
+              event.stopPropagation();
+              alert(`Show details of program ${id}`);
             }}
           >
             <img alt="Show details icon" src={More} width="100%" />
@@ -48,7 +48,7 @@ export const Thumbnail: FC<ThumbnailProps> = ({ alt, id, name, url }) => {
               setIsLoading(false);
             }}
             onError={({ currentTarget }) => {
-              currentTarget.onerror = null; // prevents looping
+              currentTarget.onerror = null;
               currentTarget.src = ImageBreak;
               currentTarget.width = 96;
             }}

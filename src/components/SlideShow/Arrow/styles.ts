@@ -11,6 +11,16 @@ const Arrow = styled.img`
   width: 48px;
 `;
 
+const LoadingWrapper = styled.div`
+  & > img {
+    pointer-events: none;
+    position: relative;
+    scale: 2.35;
+    top: 2px;
+    width: 48px;
+  }
+`;
+
 const Wrapper = styled.div`
   display: flex;
   align-items: center;
@@ -21,12 +31,22 @@ const Wrapper = styled.div`
   position: absolute;
   margin-top: -${ARROW_BTN_SIZE}px;
   top: 50%;
-  right: ${(props: Pick<SlideShowArrowProps, 'direction'>) =>
-    props.direction === 'right' ? '0' : 'auto'};
-  left: ${(props: Pick<SlideShowArrowProps, 'direction'>) =>
-    props.direction === 'left' ? '0' : 'auto'};
+  right: ${(props: Pick<SlideShowArrowProps, 'direction' | 'isLoading'>) =>
+    props.direction === 'right' ? '4px' : 'auto'};
+  left: ${(props: Pick<SlideShowArrowProps, 'direction' | 'isLoading'>) =>
+    props.direction === 'left' ? '4px' : 'auto'};
   width: ${ARROW_BTN_SIZE}px;
   z-index: 3;
+
+  ${(props: Pick<SlideShowArrowProps, 'direction' | 'isLoading'>) =>
+    props.isLoading &&
+    `
+    cursor: default;
+
+    & > img {
+      opacity: .1;
+    }
+  `}
 `;
 
-export { Arrow, Wrapper };
+export { Arrow, LoadingWrapper, Wrapper };

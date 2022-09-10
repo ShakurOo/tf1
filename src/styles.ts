@@ -1,8 +1,8 @@
 import styled, { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
-
   html, body {
+    color: #fff;
     height: 100%;
     width: 100%;
   }
