@@ -358,17 +358,31 @@ export type Uuid_Comparison_Exp = {
   _nin?: InputMaybe<Array<Scalars['uuid']>>;
 };
 
-export type GetProgramsQueryVariables = Exact<{ [key: string]: never }>;
+export type GetProgramsQueryVariables = Exact<{
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+}>;
 
 export type GetProgramsQuery = {
   __typename?: 'query_root';
-  program: Array<{ __typename?: 'program'; id: any }>;
+  program: Array<{
+    __typename?: 'program';
+    id: any;
+    name: string;
+    thumnail: { __typename?: 'image'; alt: string; id: any; url: string };
+  }>;
 };
 
 export const GetProgramsDocument = gql`
-  query GetPrograms {
-    program {
+  query GetPrograms($limit: Int, $offset: Int) {
+    program(limit: $limit, offset: $offset) {
       id
+      name
+      thumnail {
+        alt
+        id
+        url
+      }
     }
   }
 `;
@@ -385,6 +399,8 @@ export const GetProgramsDocument = gql`
  * @example
  * const { data, loading, error } = useGetProgramsQuery({
  *   variables: {
+ *      limit: // value for 'limit'
+ *      offset: // value for 'offset'
  *   },
  * });
  */

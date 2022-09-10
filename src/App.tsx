@@ -1,5 +1,3 @@
-import './App.css';
-
 import {
   ApolloClient,
   ApolloProvider,
@@ -11,7 +9,7 @@ import { onError } from '@apollo/client/link/error';
 import React from 'react';
 
 import { SlideShow } from './components/SlideShow';
-// import logo from './logo.svg';
+import { GlobalStyle, Wrapper } from './styles';
 
 // APOLLO CONFIG
 const API_ENDPOINT = 'https://tf1-interview.hasura.app/v1/graphql';
@@ -33,9 +31,10 @@ const client = new ApolloClient({
 
 const App = () => (
   <ApolloProvider client={client}>
-    <div className="App">
+    <GlobalStyle />
+    <Wrapper>
       <SlideShow />
-    </div>
+    </Wrapper>
   </ApolloProvider>
 );
 
