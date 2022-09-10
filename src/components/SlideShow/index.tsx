@@ -1,9 +1,9 @@
 import Carousel from 'better-react-carousel';
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
+import type { Program } from '../../apollo/generated';
+import { useGetProgramsQuery } from '../../apollo/generated';
 import Loader from '../../assets/loader.svg';
-import type { Program } from '../../graphql';
-import { useGetProgramsQuery } from '../../graphql';
 import type { SlideShowArrowProps } from './Arrow';
 import { SlideShowArrow } from './Arrow';
 import { LoadingWrapper, Wrapper } from './styles';

@@ -1,8 +1,8 @@
 overwrite: true
 schema: https://tf1-interview.hasura.app/v1/graphql
-documents: './src/graphql/*.query.ts'
+documents: './src/apollo/**/*.query.ts'
 generates:
-  ./src/graphql/index.ts:
+  ./src/apollo/generated.ts:
     plugins:
       - typescript
       - typescript-operations
